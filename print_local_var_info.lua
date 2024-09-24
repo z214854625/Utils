@@ -1,10 +1,35 @@
 
 --[[
-	Í¨¹ıdebug.getlocal(1, 1) ¿ÉÒÔ´òÓ¡¾Ö²¿±äÁ¿µÄÏêÏ¸ĞÅÏ¢ ¿ÉÒÔÖØÔØÒ»ÏÂÈ«¾ÖµÄtostring()º¯Êı½«tableÏêÏ¸ĞÅÏ¢´òÓ¡³öÀ´
-	Ò²¿ÉÒÔÍ³¼Æ BasicAndDiamondGiftÖĞ×Ó±íµÄ½ÚµãÊıºÍ²ã¼¶
+	é€šè¿‡debug.getlocal(1, 1) å¯ä»¥æ‰“å°å±€éƒ¨å˜é‡çš„è¯¦ç»†ä¿¡æ¯ å¯ä»¥é‡è½½ä¸€ä¸‹å…¨å±€çš„tostring()å‡½æ•°å°†tableè¯¦ç»†ä¿¡æ¯æ‰“å°å‡ºæ¥
+	ä¹Ÿå¯ä»¥ç»Ÿè®¡ BasicAndDiamondGiftä¸­å­è¡¨çš„èŠ‚ç‚¹æ•°å’Œå±‚çº§
 ]]--
 local function show1()
     local BasicAndDiamondGift = require "BasicAndDiamondGift"
+    -- ä¸“å±æŠ½å’Œå¿ƒæ„¿æŠ½
+    local RecruitAct = require "RecruitAct"
+    local BossTraining = require "BossTraining"
+    local BossTrainingMgr = require "BossTrainingMgr"
+    local GiftMgr = require "GiftMgr"
+    local GiftMsg = require "GiftMsg"
+    local BattleTeaching = require "BattleTeaching"
+    local BattleTeachingMgr = require "BattleTeachingMgr"
+    local VarAct = require "VarAct"
+    --éå†æ‰€æœ‰localå˜é‡
+    for i = 1, 200 do
+	local varName, varVal = debug.getlocal(1, i)
+        if varVal then
+            local valtype = type(varVal)
+            local count1 = (valtype == "table" and HelpFunc.table_count(varVal) or 1)
+            warning("i=", i, varName, ", count=", count1, ", val type=", valtype)
+            if valtype == "table" then
+                for subName, subVal in pairs(varVal) do
+                    local count2 = (type(subVal) == "table" and HelpFunc.table_count(subVal) or 1)
+                    print(subName, type(subVal), ", count=", count2)
+                end
+            end
+        end
+    end
+	
     local val1, name1 = debug.getlocal(1, 1)
     print("first--", val1, type(name1))
     for k1, v1 in pairs(name1) do
