@@ -29,11 +29,5 @@ local function show1()
             end
         end
     end
-	
-    local val1, name1 = debug.getlocal(1, 1)
-    print("first--", val1, type(name1))
-    for k1, v1 in pairs(name1) do
-        print("sub--", k1, type(k1), v1, type(v1))
-    end
 end
 show1()
